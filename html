@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Derico Tech store - Celulares & Computadores</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#0284c7',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #1f2937;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #9ca3af;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6b7280;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 font-sans min-h-screen flex flex-col transition-colors duration-200">
+
+    <!-- HEADER / NAVEGAÇÃO -->
+    <header class="sticky top-0 z-40 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md shadow-sm border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20 gap-4">
+                
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-2 text-2xl font-bold text-brand-600 dark:text-brand-500 shrink-0">
+                    <i class="fa-solid fa-microchip text-2xl"></i>
+                    <span>Derico Tech <span class="text-gray-900 dark:text-white">store</span></span>
+                </a>
+
+                <!-- Barra de Pesquisa (Desktop/Tablet) -->
+                <div class="hidden md:flex flex-1 max-w-md relative">
+                    <input type="text" id="search-input" placeholder="Buscar por iPhones, Laptops, Desktops..." 
+                        class="w-full pl-10 pr-4 py-2 rounded-full border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 transition-all">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-2.5 text-gray-400"></i>
+                </div>
+
+                <!-- Ações e Controles -->
+                <div class="flex items-center gap-3 sm:gap-4">
+                    <!-- Alternar Tema Claro/Escuro -->
+                    <button id="theme-toggle" title="Alternar Tema" class="p-2 text-gray-600 dark:text-gray-300 hover:text-brand-600 dark:hover:text-brand-500 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                        <i id="theme-icon" class="fa-solid fa-moon text-lg"></i>
+                    </button>
+
+                    <!-- Lista de Desejos / Favoritos -->
+                    <button id="wishlist-btn" title="Favoritos" class="relative p-2 text-gray-600 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition">
+                        <i class="fa-solid fa-heart text-lg"></i>
+                        <span id="wishlist-badge" class="hidden absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 items-center justify-center">0</span>
+                    </button>
+
+                    <!-- Carrinho de Compras -->
+                    <button id="cart-toggle-btn" class="relative flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 rounded-full font-medium text-sm transition shadow-sm hover:shadow">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="hidden sm:inline">Carrinho</span>
+                        <span id="cart-badge" class="bg-white text-brand-600 text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center ml-1">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Pesquisa Mobile -->
+            <div class="pb-3 md:hidden">
+                <div class="relative w-full">
+                    <input type="text" id="search-input-mobile" placeholder="Buscar produtos..." 
+                        class="w-full pl-10 pr-4 py-2 rounded-full border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-2.5 text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- BANNER PROMOCIONAL HERO -->
+    <section class="bg-gradient-to-r from-gray-900 via-brand-900 to-indigo-900 text-white py-12 md:py-16 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div class="text-center md:text-left max-w-xl">
+                <span class="bg-brand-500/20 text-brand-300 border border-brand-500/30 text-xs font-semibold px-3 py-1 rounded-full inline-block mb-3">
+                    <i class="fa-solid fa-bolt text-yellow-400 mr-1"></i> Bem-vindo à Derico Tech store
+                </span>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                    Upgrade no seu Setup Tech Hoje!
+                </h1>
+                <p class="mt-4 text-gray-300 text-base sm:text-lg">
+                    Encontre os melhores smartphones e computadores de alta performance na Derico Tech store com os melhores preços.
+                </p>
+                <div class="mt-6 flex flex-wrap gap-4 justify-center md:justify-start">
+                    <a href="#products-section" class="bg-brand-500 hover:bg-brand-600 text-white px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-brand-500/30 transition flex items-center gap-2">
+                        Ver Ofertas <i class="fa-solid fa-arrow-right text-sm"></i>
+                    </a>
+                    <a href="https://wa.me/258865181013" target="_blank" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-semibold shadow-lg transition flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Falar no WhatsApp
+                    </a>
+                </div>
+            </div>
+            <div class="w-full max-w-sm md:max-w-md">
+                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=800&auto=format&fit=crop" 
+                     alt="Banner Smartphones e Laptops" 
+                     class="rounded-2xl shadow-2xl object-cover w-full h-64 md:h-80 transform -rotate-1 hover:rotate-0 transition duration-300 border-2 border-white/10">
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTEÚDO PRINCIPAL (Filtros e Lista de Produtos) -->
+    <main id="products-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-1 w-full">
+        
+        <!-- Barra de Categorias e Filtros -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 pb-4 border-b border-gray-200 dark:border-gray-800">
+            
+            <!-- Botões de Categorias -->
+            <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-none" id="categories-container">
+                <button data-category="all" class="category-btn bg-brand-600 text-white px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition shadow-sm">
+                    Todos os Produtos
+                </button>
+                <button data-category="smartphones" class="category-btn bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition border border-gray-200 dark:border-gray-700">
+                    <i class="fa-solid fa-mobile-screen mr-1.5"></i> Smartphones
+                </button>
+                <button data-category="laptops" class="category-btn bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition border border-gray-200 dark:border-gray-700">
+                    <i class="fa-solid fa-laptop mr-1.5"></i> Laptops
+                </button>
+                <button data-category="desktops" class="category-btn bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition border border-gray-200 dark:border-gray-700">
+                    <i class="fa-solid fa-desktop mr-1.5"></i> Desktops
+                </button>
+                <button data-category="acessorios" class="category-btn bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition border border-gray-200 dark:border-gray-700">
+                    <i class="fa-solid fa-headphones mr-1.5"></i> Acessórios
+                </button>
+            </div>
+
+            <!-- Ordenação -->
+            <div class="flex items-center gap-2 w-full md:w-auto justify-end">
+                <label for="sort-select" class="text-sm font-medium text-gray-500 dark:text-gray-400 whitespace-nowrap">Ordenar por:</label>
+                <select id="sort-select" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200 text-sm rounded-xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                    <option value="featured">Destaques</option>
+                    <option value="price-low">Menor Preço</option>
+                    <option value="price-high">Maior Preço</option>
+                    <option value="name">Nome (A-Z)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Feedback de busca / Filtro Zerado -->
+        <div id="no-results" class="hidden text-center py-16">
+            <i class="fa-solid fa-box-open text-5xl text-gray-400 mb-4"></i>
+            <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-300">Nenhum produto encontrado</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400">Tente buscar por outros termos ou mudar a categoria.</p>
+        </div>
+
+        <!-- GRID DE PRODUTOS -->
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Injetado dinamicamente via JS -->
+        </div>
+    </main>
+
+    <!-- DRAWER DO CARRINHO LATERAL -->
+    <div id="cart-drawer-overlay" class="fixed inset-0 bg-black/50 z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+    
+    <aside id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-96 bg-white dark:bg-gray-800 z-50 shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+        <!-- Cabeçalho do Carrinho -->
+        <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-cart-shopping text-brand-600 dark:text-brand-500 text-xl"></i>
+                <h2 class="text-lg font-bold">Seu Carrinho</h2>
+            </div>
+            <button id="close-cart-btn" class="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 rounded-lg">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Lista de Itens do Carrinho -->
+        <div id="cart-items-container" class="flex-1 overflow-y-auto p-4 space-y-4">
+            <!-- Injetado por Javascript -->
+        </div>
+
+        <!-- Rodapé do Carrinho -->
+        <div class="p-4 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 space-y-3">
+            <div class="flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                <span>Subtotal</span>
+                <span id="cart-subtotal" class="font-medium text-gray-900 dark:text-white">R$ 0,00</span>
+            </div>
+            <div class="flex justify-between text-sm text-gray-600 dark:text-gray-400">
+                <span>Frete</span>
+                <span class="text-green-600 dark:text-green-400 font-medium">A combinar</span>
+            </div>
+            <div class="flex justify-between text-lg font-bold text-gray-900 dark:text-white pt-2 border-t border-gray-200 dark:border-gray-700">
+                <span>Total</span>
+                <span id="cart-total" class="text-brand-600 dark:text-brand-400">R$ 0,00</span>
+            </div>
+
+            <button id="checkout-btn" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-xl transition shadow-md flex items-center justify-center gap-2">
+                <i class="fa-brands fa-whatsapp text-xl"></i>
+                Finalizar no WhatsApp
+            </button>
+            <button id="clear-cart-btn" class="w-full text-xs text-red-500 hover:text-red-700 dark:hover:text-red-400 py-1 transition">
+                Esvaziar Carrinho
+            </button>
+        </div>
+    </aside>
+
+    <!-- RODAPÉ DE CONTATO DA DERICO TECH STORE -->
+    <footer class="bg-gray-900 text-gray-300 mt-16 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Sobre a Loja -->
+                <div>
+                    <a href="#" class="flex items-center gap-2 text-2xl font-bold text-brand-500 mb-4">
+                        <i class="fa-solid fa-microchip text-2xl"></i>
+                        <span>Derico Tech <span class="text-white">store</span></span>
+                    </a>
+                    <p class="text-sm text-gray-400">
+                        Sua loja de confiança para compra de smartphones, notebooks, desktops e acessórios com entrega rápida em Moçambique e atendimento personalizado.
+                    </p>
+                </div>
+
+                <!-- Contatos Diretos -->
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Fale Conosco</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-center gap-3">
+                            <i class="fa-brands fa-whatsapp text-green-500 text-lg"></i>
+                            <a href="https://wa.me/258865181013" target="_blank" class="hover:text-white transition">+258 865181013</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-brand-500 text-lg"></i>
+                            <span>+258 865181013</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-brand-500 text-lg"></i>
+                            <a href="mailto:nzungafrederico@gmail.com" class="hover:text-white transition">nzungafrederico@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Atendimento -->
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Atendimento</h3>
+                    <p class="text-sm text-gray-400 mb-2">
+                        Segunda a Sábado: 08:00h - 18:00h
+                    </p>
+                    <p class="text-sm text-gray-400">
+                        Faça a sua encomenda online e receba diretamente no WhatsApp ou e-mail!
+                    </p>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-xs text-gray-500">
+                &copy; <script>document.write(new Date().getFullYear())</script> Derico Tech store. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL DE DETALHES DO PRODUTO -->
+    <div id="product-modal" class="fixed inset-0 bg-black/60 z-50 opacity-0 pointer-events-none transition-opacity duration-300 flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden transform scale-95 transition-transform duration-300 max-h-[90vh] flex flex-col md:flex-row relative">
+            <button id="close-modal-btn" class="absolute top-3 right-3 z-10 bg-black/30 hover:bg-black/50 text-white w-8 h-8 rounded-full flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Imagem do Modal -->
+            <div class="md:w-1/2 bg-gray-100 dark:bg-gray-700 flex items-center justify-center p-6">
+                <img id="modal-img" src="" alt="" class="max-h-64 object-contain rounded-lg">
+            </div>
+
+            <!-- Conteúdo do Modal -->
+            <div class="md:w-1/2 p-6 flex flex-col justify-between overflow-y-auto">
+                <div>
+                    <span id="modal-category" class="text-xs uppercase tracking-wider font-semibold text-brand-600 dark:text-brand-400">Categoria</span>
+                    <h2 id="modal-title" class="text-2xl font-bold mt-1 text-gray-900 dark:text-white">Nome do Produto</h2>
+                    
+                    <div class="flex items-center gap-2 mt-2">
+                        <span id="modal-price" class="text-2xl font-extrabold text-gray-900 dark:text-white">0,00 MT</span>
+                        <span id="modal-old-price" class="text-sm text-gray-400 line-through">0,00 MT</span>
+                    </div>
+
+                    <p id="modal-description" class="text-gray-600 dark:text-gray-300 text-sm mt-4">Descrição detalhada do produto aqui...</p>
+                    
+                    <!-- Ficha Técnica Rápida -->
+                    <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                        <h4 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Especificações</h4>
+                        <ul id="modal-specs" class="text-xs space-y-1 text-gray-600 dark:text-gray-300">
+                            <!-- Injetado por JS -->
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-6">
+                    <button id="modal-add-cart-btn" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-medium py-3 rounded-xl transition shadow flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-plus"></i> Adicionar ao Carrinho
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFICAÇÕES TOAST -->
+    <div id="toast" class="fixed bottom-5 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white dark:bg-white dark:text-gray-900 px-5 py-3 rounded-xl shadow-2xl z-50 transition-all duration-300 opacity-0 pointer-events-none flex items-center gap-3">
+        <i id="toast-icon" class="fa-solid fa-circle-check text-green-400 dark:text-green-600"></i>
+        <span id="toast-message" class="text-sm font-medium">Item adicionado com sucesso!</span>
+    </div>
+
+    <script>
+        // BASE DE DADOS DOS PRODUTOS (Preços em MT)
+        const products = [
+            {
+                id: 1,
+                name: "iPhone 15 Pro Max 256GB",
+                category: "smartphones",
+                price: 95000.00,
+                oldPrice: 105000.00,
+                rating: 4.9,
+                image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?q=80&w=600&auto=format&fit=crop",
+                description: "Smartphone Apple com chip A17 Pro, estrutura em titânio, câmera principal de 48MP e tela Super Retina XDR de 6.7 polegadas.",
+                specs: ["Chip A17 Pro", "Tela Super Retina XDR 6.7\"", "Câmeras Pro de 48MP", "Titânio Aeroespacial"]
+            },
+            {
+                id: 2,
+                name: "Samsung Galaxy S24 Ultra",
+                category: "smartphones",
+                price: 82000.00,
+                oldPrice: 92000.00,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?q=80&w=600&auto=format&fit=crop",
+                description: "O mais recente flagship da Samsung com Galaxy AI, S Pen embutida, câmera zoom de 200MP e processador Snapdragon 8 Gen 3.",
+                specs: ["Snapdragon 8 Gen 3", "Câmera 200MP + AI", "S Pen Inclusa", "Bateria de 5000mAh"]
+            },
+            {
+                id: 3,
+                name: "MacBook Pro 14\" M3 Pro",
+                category: "laptops",
+                price: 135000.00,
+                oldPrice: 148000.00,
+                rating: 5.0,
+                image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=600&auto=format&fit=crop",
+                description: "Superpotência para profissionais com chip Apple M3 Pro, 18GB RAM unificada, SSD 512GB e tela Liquid Retina XDR incrível.",
+                specs: ["Apple M3 Pro 11-Core", "18GB RAM Unified", "512GB SSD", "Tela Liquid Retina XDR"]
+            },
+            {
+                id: 4,
+                name: "Dell XPS 13 Intel Core i7",
+                category: "laptops",
+                price: 78000.00,
+                oldPrice: 86000.00,
+                rating: 4.6,
+                image: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?q=80&w=600&auto=format&fit=crop",
+                description: "Notebook ultrafino e poderoso com Intel Core i7 de 13ª geração, 16GB RAM, SSD 512GB e acabamento em alumínio usinado.",
+                specs: ["Intel Core i7 13ª Gen", "16GB LPDDR5", "512GB NVMe SSD", "Tela Full HD+ InfinityEdge"]
+            },
+            {
+                id: 5,
+                name: "PC Gamer Rocket RTX 4070",
+                category: "desktops",
+                price: 105000.00,
+                oldPrice: 118000.00,
+                rating: 4.9,
+                image: "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?q=80&w=600&auto=format&fit=crop",
+                description: "Desktop completo pronto para jogos em 4K e tarefas pesadas de renderização. Equipado com Nvidia GeForce RTX 4070.",
+                specs: ["Intel Core i7-13700F", "RTX 4070 12GB", "32GB RAM DDR5", "SSD 1TB NVMe"]
+            },
+            {
+                id: 6,
+                name: "iMac 24\" Chip M3 4.5K",
+                category: "desktops",
+                price: 120000.00,
+                oldPrice: 132000.00,
+                rating: 4.7,
+                image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?q=80&w=600&auto=format&fit=crop",
+                description: "Computador All-in-One da Apple com design ultrafino, tela Retina 4.5K espetacular e a velocidade impressionante do M3.",
+                specs: ["Chip M3 8-Core", "Tela Retina 4.5K", "8GB RAM / 256GB SSD", "Mouse e Teclado Inclusos"]
+            },
+            {
+                id: 7,
+                name: "Headset Gamer Wireless Surround",
+                category: "acessorios",
+                price: 6500.00,
+                oldPrice: 8000.00,
+                rating: 4.5,
+                image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=600&auto=format&fit=crop",
+                description: "Fone de ouvido sem fio de alta fidelidade com som surround 7.1 espacial, microfone com cancelamento de ruído e bateria duradoura.",
+                specs: ["Som Surround 7.1", "Bateria de 30 horas", "Conexão 2.4GHz + Bluetooth", "Almofadas Memory Foam"]
+            },
+            {
+                id: 8,
+                name: "Monitor Gamer Curvo 27\" 165Hz",
+                category: "acessorios",
+                price: 18500.00,
+                oldPrice: 21500.00,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?q=80&w=600&auto=format&fit=crop",
+                description: "Monitor de alta performance com curvatura 1500R, taxa de atualização de 165Hz e tempo de resposta ultra-rápido de 1ms.",
+                specs: ["27 polegadas Full HD", "165Hz / 1ms", "Painel VA Curvo", "FreeSync & G-Sync Compatible"]
+            }
+        ];
+
+        // ESTADO DA APLICAÇÃO
+        let cart = JSON.parse(localStorage.getItem('techstore_cart')) || [];
+        let wishlist = JSON.parse(localStorage.getItem('techstore_wishlist')) || [];
+        let currentCategory = 'all';
+        let currentSort = 'featured';
+        let searchQuery = '';
+        let activeModalProductId = null;
+
+        // ELEMENTOS DOM
+        const productsGrid = document.getElementById('products-grid');
+        const noResults = document.getElementById('no-results');
+        const cartBadge = document.getElementById('cart-badge');
+        const wishlistBadge = document.getElementById('wishlist-badge');
+        const cartDrawer = document.getElementById('cart-drawer');
+        const cartOverlay = document.getElementById('cart-drawer-overlay');
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        const cartSubtotalEl = document.getElementById('cart-subtotal');
+        const cartTotalEl = document.getElementById('cart-total');
+        const productModal = document.getElementById('product-modal');
+        const toast = document.getElementById('toast');
+
+        // UTILS - Formatador em Meticais (MT)
+        const formatCurrency = (val) => {
+            return val.toLocaleString('pt-MZ', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' MT';
+        };
+
+        const showToast = (message, iconClass = 'fa-circle-check text-green-400') => {
+            const toastMessage = document.getElementById('toast-message');
+            const toastIcon = document.getElementById('toast-icon');
+            
+            toastMessage.textContent = message;
+            toastIcon.className = `fa-solid ${iconClass}`;
+            
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            toast.classList.add('opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('opacity-100');
+                toast.classList.add('opacity-0', 'pointer-events-none');
+            }, 2500);
+        };
+
+        // RENDERIZAR PRODUTOS NA GRID
+        function renderProducts() {
+            let filtered = products.filter(p => {
+                const matchesCategory = currentCategory === 'all' || p.category === currentCategory;
+                const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                      p.description.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+
+            // Ordenação
+            if (currentSort === 'price-low') {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (currentSort === 'price-high') {
+                filtered.sort((a, b) => b.price - a.price);
+            } else if (currentSort === 'name') {
+                filtered.sort((a, b) => a.name.localeCompare(b.name));
+            }
+
+            if (filtered.length === 0) {
+                productsGrid.innerHTML = '';
+                noResults.classList.remove('hidden');
+                return;
+            } else {
+                noResults.classList.add('hidden');
+            }
+
+            productsGrid.innerHTML = filtered.map(product => {
+                const isFavorited = wishlist.includes(product.id);
+                return `
+                <div class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700/60 shadow-sm hover:shadow-xl transition duration-300 flex flex-col justify-between overflow-hidden group">
+                    <div class="relative bg-gray-100 dark:bg-gray-700/50 p-6 flex items-center justify-center h-52 overflow-hidden">
+                        <img src="${product.image}" alt="${product.name}" class="max-h-40 object-contain group-hover:scale-105 transition duration-300">
+                        
+                        <!-- Badge Desconto -->
+                        ${product.oldPrice ? `
+                            <span class="absolute top-3 left-3 bg-red-500 text-white text-[10px] font-bold uppercase px-2 py-1 rounded-full">
+                                OFF ${Math.round((1 - product.price / product.oldPrice) * 100)}%
+                            </span>
+                        ` : ''}
+
+                        <!-- Botão Favorito -->
+                        <button onclick="toggleWishlist(${product.id})" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm flex items-center justify-center text-gray-400 hover:text-red-500 transition shadow-sm">
+                            <i class="${isFavorited ? 'fa-solid text-red-500' : 'fa-regular'} fa-heart"></i>
+                        </button>
+                    </div>
+
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between text-xs text-gray-400 mb-1">
+                                <span class="uppercase tracking-wider font-semibold text-brand-600 dark:text-brand-400">${product.category}</span>
+                                <span class="flex items-center text-amber-400"><i class="fa-solid fa-star mr-1 text-xs"></i>${product.rating}</span>
+                            </div>
+                            <h3 class="font-bold text-gray-900 dark:text-white text-base leading-snug line-clamp-1">${product.name}</h3>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-2 line-clamp-2">${product.description}</p>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-t border-gray-100 dark:border-gray-700/50">
+                            <div class="flex items-baseline gap-2 mb-3">
+                                <span class="text-xl font-extrabold text-gray-900 dark:text-white">${formatCurrency(product.price)}</span>
+                                ${product.oldPrice ? `<span class="text-xs text-gray-400 line-through">${formatCurrency(product.oldPrice)}</span>` : ''}
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2">
+                                <button onclick="openModal(${product.id})" class="text-xs font-semibold py-2 px-3 rounded-xl border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition text-center">
+                                    Detalhes
+                                </button>
+                                <button onclick="addToCart(${product.id})" class="text-xs font-semibold py-2 px-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white transition flex items-center justify-center gap-1.5 shadow-sm">
+                                    <i class="fa-solid fa-cart-plus"></i> Comprar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `}).join('');
+        }
+
+        // LÓGICA DO CARRINHO
+        function addToCart(productId) {
+            const existing = cart.find(item => item.id === productId);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                const product = products.find(p => p.id === productId);
+                cart.push({ ...product, quantity: 1 });
+            }
+            saveCart();
+            updateCartUI();
+            showToast('Produto adicionado ao carrinho!');
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            saveCart();
+            updateCartUI();
+        }
+
+        function changeQuantity(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (!item) return;
+
+            item.quantity += delta;
+            if (item.quantity <= 0) {
+                removeFromCart(productId);
+            } else {
+                saveCart();
+                updateCartUI();
+            }
+        }
+
+        function saveCart() {
+            localStorage.setItem('techstore_cart', JSON.stringify(cart));
+        }
+
+        function updateCartUI() {
+            // Contagem de itens
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartBadge.textContent = totalCount;
+
+            // Preenchimento dos itens no Drawer
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="text-center py-12">
+                        <i class="fa-solid fa-basket-shopping text-4xl text-gray-300 dark:text-gray-600 mb-3"></i>
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Seu carrinho está vazio</p>
+                    </div>
+                `;
+            } else {
+                cartItemsContainer.innerHTML = cart.map(item => `
+                    <div class="flex gap-3 bg-gray-50 dark:bg-gray-700/40 p-3 rounded-xl items-center">
+                        <img src="${item.image}" alt="${item.name}" class="w-14 h-14 object-contain bg-white dark:bg-gray-800 p-1 rounded-lg">
+                        <div class="flex-1">
+                            <h4 class="text-xs font-bold text-gray-900 dark:text-white line-clamp-1">${item.name}</h4>
+                            <span class="text-xs text-brand-600 dark:text-brand-400 font-bold">${formatCurrency(item.price)}</span>
+                            
+                            <div class="flex items-center gap-2 mt-2">
+                                <button onclick="changeQuantity(${item.id}, -1)" class="w-6 h-6 rounded bg-gray-200 dark:bg-gray-600 flex items-center justify-center text-xs text-gray-700 dark:text-gray-200 hover:bg-gray-300">-</button>
+                                <span class="text-xs font-semibold">${item.quantity}</span>
+                                <button onclick="changeQuantity(${item.id}, 1)" class="w-6 h-6 rounded bg-gray-200 dark:bg-gray-600 flex items-center justify-center text-xs text-gray-700 dark:text-gray-200 hover:bg-gray-300">+</button>
+                            </div>
+                        </div>
+                        <button onclick="removeFromCart(${item.id})" class="text-gray-400 hover:text-red-500 p-1 transition">
+                            <i class="fa-solid fa-trash-can text-sm"></i>
+                        </button>
+                    </div>
+                `).join('');
+            }
+
+            // Totais
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartSubtotalEl.textContent = formatCurrency(subtotal);
+            cartTotalEl.textContent = formatCurrency(subtotal);
+        }
+
+        // WISHLIST / FAVORITOS
+        function toggleWishlist(productId) {
+            if (wishlist.includes(productId)) {
+                wishlist = wishlist.filter(id => id !== productId);
+                showToast('Removido dos favoritos', 'fa-heart-crack text-red-400');
+            } else {
+                wishlist.push(productId);
+                showToast('Adicionado aos favoritos!', 'fa-heart text-red-500');
+            }
+            localStorage.setItem('techstore_wishlist', JSON.stringify(wishlist));
+            wishlistBadge.textContent = wishlist.length;
+            if(wishlist.length > 0) {
+                wishlistBadge.classList.remove('hidden');
+                wishlistBadge.classList.add('flex');
+            } else {
+                wishlistBadge.classList.add('hidden');
+                wishlistBadge.classList.remove('flex');
+            }
+            renderProducts();
+        }
+
+        // MODAL DE PRODUTO
+        function openModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            activeModalProductId = productId;
+            document.getElementById('modal-img').src = product.image;
+            document.getElementById('modal-title').textContent = product.name;
+            document.getElementById('modal-category').textContent = product.category;
+            document.getElementById('modal-price').textContent = formatCurrency(product.price);
+            document.getElementById('modal-old-price').textContent = product.oldPrice ? formatCurrency(product.oldPrice) : '';
+            document.getElementById('modal-description').textContent = product.description;
+
+            const specsList = document.getElementById('modal-specs');
+            specsList.innerHTML = product.specs.map(s => `<li class="flex items-center gap-1.5"><i class="fa-solid fa-check text-green-500 text-[10px]"></i> ${s}</li>`).join('');
+
+            productModal.classList.remove('opacity-0', 'pointer-events-none');
+            productModal.querySelector('div').classList.remove('scale-95');
+            productModal.querySelector('div').classList.add('scale-100');
+        }
+
+        function closeModal() {
+            productModal.classList.add('opacity-0', 'pointer-events-none');
+            productModal.querySelector('div').classList.remove('scale-100');
+            productModal.querySelector('div').classList.add('scale-95');
+            activeModalProductId = null;
+        }
+
+        // EVENT LISTENERS & INICIALIZAÇÃO
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Inicializar render
+            renderProducts();
+            updateCartUI();
+
+            // Atualizar contagem favoritos inicial
+            if(wishlist.length > 0) {
+                wishlistBadge.textContent = wishlist.length;
+                wishlistBadge.classList.remove('hidden');
+                wishlistBadge.classList.add('flex');
+            }
+
+            // Alternar tema Claro/Escuro
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+
+            themeToggleBtn.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                if (document.documentElement.classList.contains('dark')) {
+                    themeIcon.className = 'fa-solid fa-sun text-yellow-400 text-lg';
+                } else {
+                    themeIcon.className = 'fa-solid fa-moon text-lg';
+                }
+            });
+
+            // Filtro por Categoria
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    categoryBtns.forEach(b => {
+                        b.classList.remove('bg-brand-600', 'text-white');
+                        b.classList.add('bg-white', 'dark:bg-gray-800', 'text-gray-700', 'dark:text-gray-200');
+                    });
+                    btn.classList.remove('bg-white', 'dark:bg-gray-800', 'text-gray-700', 'dark:text-gray-200');
+                    btn.classList.add('bg-brand-600', 'text-white');
+
+                    currentCategory = btn.dataset.category;
+                    renderProducts();
+                });
+            });
+
+            // Ordenação
+            document.getElementById('sort-select').addEventListener('change', (e) => {
+                currentSort = e.target.value;
+                renderProducts();
+            });
+
+            // Pesquisa Input (Desktop + Mobile)
+            const handleSearch = (e) => {
+                searchQuery = e.target.value;
+                renderProducts();
+            };
+            document.getElementById('search-input').addEventListener('input', handleSearch);
+            document.getElementById('search-input-mobile').addEventListener('input', handleSearch);
+
+            // Toggle Carrinho Drawer
+            const cartToggleBtn = document.getElementById('cart-toggle-btn');
+            const closeCartBtn = document.getElementById('close-cart-btn');
+
+            const openCart = () => {
+                cartDrawer.classList.remove('translate-x-full');
+                cartOverlay.classList.remove('opacity-0', 'pointer-events-none');
+            };
+
+            const closeCart = () => {
+                cartDrawer.classList.add('translate-x-full');
+                cartOverlay.classList.add('opacity-0', 'pointer-events-none');
+            };
+
+            cartToggleBtn.addEventListener('click', openCart);
+            closeCartBtn.addEventListener('click', closeCart);
+            cartOverlay.addEventListener('click', closeCart);
+
+            // Modal Handlers
+            document.getElementById('close-modal-btn').addEventListener('click', closeModal);
+            productModal.addEventListener('click', (e) => {
+                if (e.target === productModal) closeModal();
+            });
+
+            document.getElementById('modal-add-cart-btn').addEventListener('click', () => {
+                if (activeModalProductId) {
+                    addToCart(activeModalProductId);
+                    closeModal();
+                }
+            });
+
+            // Esvaziar Carrinho
+            document.getElementById('clear-cart-btn').addEventListener('click', () => {
+                if (cart.length > 0) {
+                    cart = [];
+                    saveCart();
+                    updateCartUI();
+                    showToast('Carrinho esvaziado');
+                }
+            });
+
+            // Finalizar Compra via WhatsApp
+            document.getElementById('checkout-btn').addEventListener('click', () => {
+                if (cart.length === 0) {
+                    showToast('Seu carrinho está vazio!', 'fa-circle-exclamation text-amber-400');
+                    return;
+                }
+
+                let message = "Olá! Gostaria de finalizar o meu pedido na *Derico Tech store*:\n\n";
+                cart.forEach(item => {
+                    message += `• ${item.quantity}x *${item.name}* - ${formatCurrency(item.price * item.quantity)}\n`;
+                });
+
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                message += `\n*Total:* ${formatCurrency(total)}\n\n*Cliente / Contato:* nzungafrederico@gmail.com\n\nAguardo confirmação do pedido!`;
+
+                const encoded = encodeURIComponent(message);
+                // Direcionado para o número 865181013 (+258)
+                window.open(`https://wa.me/258865181013?text=${encoded}`, '_blank');
+            });
+        });
+    </script>
+</body>
+</html>
