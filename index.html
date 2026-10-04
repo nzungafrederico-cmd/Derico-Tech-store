@@ -53,6 +53,9 @@
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 font-sans min-h-screen flex flex-col transition-colors duration-200">
+<nav>
+    <a href="#telemoveis">Telemóveis & Laptops</a>
+</nav>
 
     <!-- HEADER / NAVEGAÇÃO -->
     <header class="sticky top-0 z-40 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md shadow-sm border-b border-gray-200 dark:border-gray-700">
@@ -147,18 +150,37 @@
                 <button data-category="all" class="category-btn bg-brand-600 text-white px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition shadow-sm">
                     Todos os Produtos
                 </button>
-                <button data-category="smartphones" class="category-btn bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition border border-gray-200 dark:border-gray-700">
-                    <i class="fa-solid fa-mobile-screen mr-1.5"></i> Smartphones
-                </button>
-                <button data-category="laptops" class="category-btn bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition border border-gray-200 dark:border-gray-700">
-                    <i class="fa-solid fa-laptop mr-1.5"></i> Laptops
-                </button>
-                <button data-category="desktops" class="category-btn bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition border border-gray-200 dark:border-gray-700">
-                    <i class="fa-solid fa-desktop mr-1.5"></i> Desktops
-                </button>
-                <button data-category="acessorios" class="category-btn bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 px-4 py-2 rounded-xl text-sm font-medium whitespace-nowrap transition border border-gray-200 dark:border-gray-700">
-                    <i class="fa-solid fa-headphones mr-1.5"></i> Acessórios
-                </button>
+                <!-- Todos os Produtos -->
+      <button data-category="all" class="category-btn bg-white">
+        Todos os Produtos
+      </button>
+
+      <!-- Roupas Desportivas (EM PRIMEIRO LUGAR E EM DESTAQUE) -->
+      <a href="desporto.html" class="inline-block">
+        <button class="category-btn bg-blue-600 text-white font-semibold shadow-md hover:bg-blue-700 transition-all duration-300">
+          <i class="fa-solid fa-shirt mr-1.5"></i> Roupas Desportivas
+        </button>
+      </a>
+
+      <!-- Smartphones -->
+      <button data-category="smartphones" class="category-btn bg-white">
+        <i class="fa-solid fa-mobile-screen mr-1.5"></i> Smartphones
+      </button>
+
+      <!-- Laptops -->
+      <button data-category="laptops" class="category-btn bg-white">
+        <i class="fa-solid fa-laptop mr-1.5"></i> Laptops
+      </button>
+
+      <!-- Desktops -->
+      <button data-category="desktops" class="category-btn bg-white">
+        <i class="fa-solid fa-desktop mr-1.5"></i> Desktops
+      </button>
+
+      <!-- Acessórios -->
+      <button data-category="acessorios" class="category-btn bg-white">
+        <i class="fa-solid fa-headphones mr-1.5"></i> Acessórios
+      </button>
             </div>
 
             <!-- Ordenação -->
@@ -789,4 +811,3 @@
         });
     </script>
 </body>
-</html>

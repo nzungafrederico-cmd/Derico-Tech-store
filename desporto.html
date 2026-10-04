@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roupas Desportivas - Derico Tech Store</title>
+
+  <style>
+    /* Estilos Gerais */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f4f6f9;
+      color: #333;
+    }
+
+    /* Cabeçalho */
+    header {
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    nav a {
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover, nav a.ativo {
+      color: #38bdf8;
+    }
+
+    /* Contentor Principal */
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .titulo-seccao {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .titulo-seccao h2 {
+      font-size: 2rem;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+
+    .titulo-seccao p {
+      color: #64748b;
+      font-size: 1rem;
+    }
+
+    /* Grelha de Produtos */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      justify-content: center;
+    }
+
+    /* Cartão do Produto */
+    .card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .card img {
+      width: 100%;
+      height: 230px;
+      object-fit: contain;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      color: #1e293b;
+      margin-bottom: 6px;
+    }
+
+    .card .descricao {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-bottom: 15px;
+    }
+
+    .card .preco {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #2563eb;
+      margin-bottom: 18px;
+    }
+
+    /* Botão do WhatsApp */
+    .btn-comprar {
+      display: inline-block;
+      background-color: #25d366;
+      color: white;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn-comprar:hover {
+      background-color: #1eb956;
+      transform: scale(1.02);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Derico Tech Store</h1>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="desporto.html" class="ativo">Roupas Desportivas</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="titulo-seccao">
+      <h2>Equipamentos de Futebol - Todos os Times</h2>
+      <p>Escolha o seu equipamento desportivo preferido com a melhor qualidade.</p>
+    </div>
+
+    <div class="grid">
+      <!-- Produto 1: Camisola -->
+      <div class="card">
+        <img src="imagens/barcelona-shirt.jpg" alt="Camisola FC Barcelona">
+        <h3>Camisola FC Barcelona</h3>
+        <p class="descricao">Todos os clubes e seleções disponíveis</p>
+        <div class="preco">900 MT</div>
+        <a class="btn-comprar" href="https://wa.me/258865181013?text=Olá!%20Quero%20comprar%20a%20camisola%20do%20Barcelona">Comprar pelo WhatsApp</a>
+      </div>
+
+      <!-- Produto 2: Fato de Treino -->
+      <div class="card">
+        <img src="imagens/nike-tech.jpg" alt="Fato de Treino Nike Tech Fleece">
+        <h3>Fato de Treino Nike Tech Fleece</h3>
+        <p class="descricao">Diversos tamanhos (S, M, L, XL)</p>
+        <div class="preco">2500 MT</div>
+        <a class="btn-comprar" href="https://wa.me/258865181013?text=Olá!%20Quero%20comprar%20o%20fato%20de%20treino%20Nike">Comprar pelo WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
